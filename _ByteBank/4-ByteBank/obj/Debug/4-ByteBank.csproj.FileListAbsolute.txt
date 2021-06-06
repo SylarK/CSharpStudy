@@ -1,6 +1,0 @@
-D:\study\CSharp\repos\ByteBank\4-ByteBank\obj\Debug\4-ByteBank.csproj.CoreCompileInputs.cache
-D:\study\CSharp\repos\ByteBank\4-ByteBank\bin\Debug\4-ByteBank.exe.config
-D:\study\CSharp\repos\ByteBank\4-ByteBank\bin\Debug\4-ByteBank.exe
-D:\study\CSharp\repos\ByteBank\4-ByteBank\bin\Debug\4-ByteBank.pdb
-D:\study\CSharp\repos\ByteBank\4-ByteBank\obj\Debug\4-ByteBank.exe
-D:\study\CSharp\repos\ByteBank\4-ByteBank\obj\Debug\4-ByteBank.pdb

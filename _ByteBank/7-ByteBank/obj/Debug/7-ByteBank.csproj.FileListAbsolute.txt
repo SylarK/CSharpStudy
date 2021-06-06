@@ -1,7 +1,0 @@
-D:\study\CSharp\repos\ByteBank\7-ByteBank\bin\Debug\7-ByteBank.exe.config
-D:\study\CSharp\repos\ByteBank\7-ByteBank\bin\Debug\7-ByteBank.exe
-D:\study\CSharp\repos\ByteBank\7-ByteBank\bin\Debug\7-ByteBank.pdb
-D:\study\CSharp\repos\ByteBank\7-ByteBank\obj\Debug\7-ByteBank.csproj.AssemblyReference.cache
-D:\study\CSharp\repos\ByteBank\7-ByteBank\obj\Debug\7-ByteBank.csproj.CoreCompileInputs.cache
-D:\study\CSharp\repos\ByteBank\7-ByteBank\obj\Debug\7-ByteBank.exe
-D:\study\CSharp\repos\ByteBank\7-ByteBank\obj\Debug\7-ByteBank.pdb
