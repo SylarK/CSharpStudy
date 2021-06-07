@@ -1,5 +1,6 @@
 ﻿// using _05_ByteBank;
 
+using ByteBank.Exceptions;
 using System;
 
 namespace ByteBank
@@ -11,13 +12,14 @@ namespace ByteBank
         public static double TaxaOperacao { get; private set; }
         public static int TotalDeContasCriadas { get; private set; }
 
-
-        private int _agencia;
         public int Agencia { get; } //SET is readonly
 
         public int Numero { get; } //SET is readonly
 
         private double _saldo = 100;
+
+        public int TentativaSaqueInvalido { get; private set; }
+        public int TentativaTransferenciaInvalida { get; private set; }
 
         public double Saldo
         {
@@ -39,32 +41,40 @@ namespace ByteBank
 
         public ContaCorrente(int agencia, int numero)
         {
-            this.Agencia = agencia;
-            this.Numero = numero;
+            
+            if (agencia <= 0)
+            {
+                throw new ArgumentException("O argumento agência deve ser maior que zero.", nameof(agencia));
+            }
+            if(numero <= 0)
+            {
+                throw new ArgumentException("O argumento número deve ser maior que zero.", nameof(numero));
+            }
 
-            try
-            {
-                TaxaOperacao = 30 / TotalDeContasCriadas;
-            }
-            catch (DivideByZeroException)
-            {
-                Console.WriteLine("Tentativa de divisão por zero.");
-                throw;
-            }
+
+            this.Agencia = agencia;
+            this.Numero = numero;    
 
             TotalDeContasCriadas++;
+            TaxaOperacao = 30 / TotalDeContasCriadas;
+
         }
 
 
-        public bool Sacar(double valor)
+        public void Sacar(double valor)
         {
+            if(valor <= 0)
+            {
+                throw new ArgumentException("O valor de saque deve ser maior que R$ 0", nameof(valor));
+            }
+
             if (_saldo < valor)
             {
-                return false;
+                TentativaSaqueInvalido++;
+                throw new ValidaSaldoException(valor, this.Saldo);
             }
 
             _saldo -= valor;
-            return true;
         }
 
         public void Depositar(double valor)
@@ -73,16 +83,22 @@ namespace ByteBank
         }
 
 
-        public bool Transferir(double valor, ContaCorrente contaDestino)
+        public void Transferir(double valor, ContaCorrente contaDestino)
         {
-            if (_saldo < valor)
+            if (valor <= 0)
             {
-                return false;
+                throw new ArgumentException("O valor de transferência deve ser maior que R$ 0", nameof(valor));
             }
-
-            _saldo -= valor;
+            try
+            {
+                Sacar(valor);
+            }
+            catch (ValidaSaldoException e)
+            {
+                TentativaTransferenciaInvalida++;
+                throw new OperacaoFinanceiraException("Operação não finalizada!", e);
+            }
             contaDestino.Depositar(valor);
-            return true;
         }
     }
 }
